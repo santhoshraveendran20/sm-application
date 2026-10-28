@@ -7,16 +7,21 @@ import AdminSettings from "./Components/Pages/AdminSettings/AdminSettings.jsx";
 import UserManagement from "./Components/Pages/UserManagement/UserManagement.jsx";
 import RoleManagement from "./Components/Pages/RoleManagement/RoleManagement.jsx";
 import RolePermissions from "./Components/Pages/RolePermissions/RolePermissions.jsx";
+import AuditLog from "./Components/Pages/AuditLog/AuditLog.jsx";
 import ComingSoon from "./Components/Pages/ComingSoon/ComingSoon.jsx";
 import ErrorPage from "./Components/Pages/ErrorPage/ErrorPage.jsx";
 import { flatNavItems } from "./Components/Pages/Sidebar/SidebarData.js";
+
+const modulePages = {
+  "/audit": <AuditLog />,
+};
 
 const moduleRoutes = flatNavItems
   .filter((item) => !item.link.startsWith("/admin"))
   .map((item) => ({
     path: item.link,
     handle: { crumbs: item.parent ? [item.parent, item.label] : [item.label] },
-    element: <ComingSoon />,
+    element: modulePages[item.link] || <ComingSoon />,
   }));
 
 const AdminRouter = [
