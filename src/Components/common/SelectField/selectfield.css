@@ -1,0 +1,37 @@
+.select-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.select-input {
+  padding-right: 36px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+.select-input option {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.select-chevron {
+  position: absolute;
+  right: 12px;
+  color: var(--ink-2);
+  pointer-events: none;
+}
+
+.select-field.compact .select-input {
+  height: 34px;
+  padding-left: 10px;
+  padding-right: 30px;
+  font-size: 13px;
+}
+
+.select-field.compact .select-chevron {
+  right: 9px;
+}

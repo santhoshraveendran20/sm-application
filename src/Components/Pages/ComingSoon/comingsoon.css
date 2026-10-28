@@ -1,0 +1,6 @@
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fade-up 0.3s var(--ease);
+}

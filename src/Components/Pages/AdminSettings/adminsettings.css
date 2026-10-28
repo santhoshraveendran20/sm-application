@@ -1,0 +1,117 @@
+.admin-settings {
+  display: flex;
+  flex-direction: column;
+  animation: fade-up 0.3s var(--ease);
+}
+
+.admin-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-head-text {
+  min-width: 0;
+}
+
+.admin-add {
+  flex: none;
+  height: 42px;
+  margin-top: 12px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 22px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.admin-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-tab {
+  position: relative;
+  flex: none;
+  padding: 10px 12px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.15s var(--ease);
+}
+
+.admin-tab:hover {
+  color: var(--ink);
+}
+
+.admin-tab.active {
+  color: var(--ink);
+}
+
+.admin-tab.active::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+}
+
+.admin-panel {
+  margin-top: 20px;
+}
+
+@media (min-width: 1024px) and (min-height: 640px) {
+  .admin-settings {
+    height: calc(100vh - var(--topbar-h) - 60px);
+    height: calc(100dvh - var(--topbar-h) - 60px);
+  }
+
+  .admin-panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 640px) {
+  .admin-settings {
+    height: calc(100vh - var(--topbar-h) - 68px);
+    height: calc(100dvh - var(--topbar-h) - 68px);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-title {
+    font-size: 24px;
+  }
+
+  .admin-head {
+    align-items: center;
+  }
+
+  .admin-add {
+    height: 40px;
+    margin-top: 0;
+    padding: 0 14px;
+  }
+
+  .admin-tabs {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .admin-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

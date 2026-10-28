@@ -1,0 +1,13 @@
+.app-toast {
+  line-height: 1.45;
+}
+
+.app-toast > div[role="status"] {
+  margin: 0 4px;
+}
+
+@media (max-width: 640px) {
+  .app-toast {
+    max-width: calc(100vw - 32px) !important;
+  }
+}

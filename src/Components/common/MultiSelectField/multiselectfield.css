@@ -1,0 +1,132 @@
+.multi-select {
+  position: relative;
+  min-width: 0;
+}
+
+.ms-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ms-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ms-chevron {
+  flex: none;
+  color: var(--ink-2);
+  transition: transform 0.15s var(--ease);
+}
+
+.multi-select.is-open .ms-trigger {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.multi-select.is-open .ms-chevron {
+  transform: rotate(180deg);
+}
+
+.ms-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  width: max(100%, 260px);
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  animation: fade-up 0.15s var(--ease);
+}
+
+.ms-panel:focus {
+  outline: none;
+}
+
+.ms-search {
+  margin-bottom: 6px;
+}
+
+.ms-search .input {
+  height: 36px;
+  font-size: 13.5px;
+}
+
+.ms-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.ms-option:hover,
+.ms-option.is-checked {
+  background: var(--surface-2);
+}
+
+.ms-option input {
+  margin-top: 0;
+}
+
+.ms-all {
+  margin-bottom: 4px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-weight: 600;
+}
+
+.ms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 232px;
+  overflow-y: auto;
+}
+
+.ms-empty {
+  padding: 16px 8px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.ms-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 8px 4px 0;
+  border-top: 1px solid var(--line);
+}
+
+.ms-clear {
+  padding: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.ms-clear:hover:not(:disabled) {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.ms-clear:disabled {
+  color: var(--muted);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
