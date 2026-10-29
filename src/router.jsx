@@ -8,11 +8,33 @@ import UserManagement from "./Components/Pages/UserManagement/UserManagement.jsx
 import RoleManagement from "./Components/Pages/RoleManagement/RoleManagement.jsx";
 import RolePermissions from "./Components/Pages/RolePermissions/RolePermissions.jsx";
 import AuditLog from "./Components/Pages/AuditLog/AuditLog.jsx";
+import Leakage from "./Components/Pages/Leakage/Leakage.jsx";
+import HcpFatigue from "./Components/Pages/HcpFatigue/HcpFatigue.jsx";
+import ManualUpload from "./Components/Pages/DataUpload/ManualUpload.jsx";
+import Automation from "./Components/Pages/DataUpload/Automation.jsx";
+import ProcessingHistory from "./Components/Pages/DataUpload/ProcessingHistory.jsx";
+import Thresholds from "./Components/Pages/Configurations/Thresholds.jsx";
+import RiskRules from "./Components/Pages/Configurations/RiskRules.jsx";
+import Notifications from "./Components/Pages/Configurations/Notifications.jsx";
+import Integrations from "./Components/Pages/Configurations/Integrations.jsx";
+import Salesforce from "./Components/Pages/Salesforce/Salesforce.jsx";
+import Assistant from "./Components/Pages/Assistant/Assistant.jsx";
 import ComingSoon from "./Components/Pages/ComingSoon/ComingSoon.jsx";
 import ErrorPage from "./Components/Pages/ErrorPage/ErrorPage.jsx";
 import { flatNavItems } from "./Components/Pages/Sidebar/SidebarData.js";
 
 const modulePages = {
+  "/leakage": <Leakage />,
+  "/fatigue": <HcpFatigue />,
+  "/upload/manual": <ManualUpload />,
+  "/upload/automation": <Automation />,
+  "/upload/history": <ProcessingHistory />,
+  "/config/thresholds": <Thresholds />,
+  "/config/rules": <RiskRules />,
+  "/config/notifications": <Notifications />,
+  "/config/integrations": <Integrations />,
+  "/salesforce": <Salesforce />,
+  "/assistant": <Assistant />,
   "/audit": <AuditLog />,
 };
 
