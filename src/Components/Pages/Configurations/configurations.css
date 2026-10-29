@@ -55,8 +55,15 @@
   color: var(--ink);
 }
 
-.cf-tab.is-upcoming:not(.active) {
-  opacity: 0.6;
+.cf-tab.is-disabled {
+  color: var(--muted);
+  opacity: 0.7;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.cf-tab.is-disabled:hover {
+  color: var(--muted);
 }
 
 .cf-tab-phase {

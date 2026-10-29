@@ -32,7 +32,7 @@ export const SidebarData = [
     base: "/config",
     children: [
       { id: "config-thresholds", label: "Thresholds", link: "/config/thresholds" },
-      { id: "config-rules", label: "Risk rules", link: "/config/rules" },
+      { id: "config-rules", label: "Risk rules", link: "/config/rules", phase: 2, disabled: "Coming in the next phase" },
       { id: "config-notifications", label: "Notifications", link: "/config/notifications" },
       { id: "config-integrations", label: "Integrations", link: "/config/integrations" },
     ],

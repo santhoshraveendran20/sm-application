@@ -12,6 +12,22 @@ const FLYOUT_CHROME = 64;
 
 const isInGroup = (item, pathname) => Boolean(item.base) && pathname.startsWith(item.base);
 
+function DisabledSubItem({ child, className }) {
+  return (
+    <span
+      role="link"
+      aria-disabled="true"
+      tabIndex={0}
+      title={child.disabled}
+      aria-label={`${child.label}, unavailable. ${child.disabled}`}
+      className={`${className} is-disabled`}
+    >
+      <span className="sidebar-sub-label">{child.label}</span>
+      {child.phase && <span className="sidebar-phase">Phase {child.phase}</span>}
+    </span>
+  );
+}
+
 function Sidebar({ compact, mobileOpen, onNavigate }) {
   const { pathname } = useLocation();
   const [expanded, setExpanded] = useState(() => SidebarData.filter((item) => isInGroup(item, pathname)).map((item) => item.id));
@@ -140,13 +156,17 @@ function Sidebar({ compact, mobileOpen, onNavigate }) {
                   <ul className="sidebar-submenu" id={`nav-group-${item.id}`}>
                     {item.children.map((child) => (
                       <li key={child.id}>
-                        <NavLink
-                          to={child.link}
-                          className={({ isActive }) => `sidebar-sublink ${isActive ? "active" : ""}`}
-                          onClick={onNavigate}
-                        >
-                          {child.label}
-                        </NavLink>
+                        {child.disabled ? (
+                          <DisabledSubItem child={child} className="sidebar-sublink" />
+                        ) : (
+                          <NavLink
+                            to={child.link}
+                            className={({ isActive }) => `sidebar-sublink ${isActive ? "active" : ""}`}
+                            onClick={onNavigate}
+                          >
+                            {child.label}
+                          </NavLink>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -179,13 +199,17 @@ function Sidebar({ compact, mobileOpen, onNavigate }) {
           <ul>
             {floating.item.children.map((child) => (
               <li key={child.id}>
-                <NavLink
-                  to={child.link}
-                  className={({ isActive }) => `sidebar-flyout-link ${isActive ? "active" : ""}`}
-                  onClick={handleFlyoutNavigate}
-                >
-                  {child.label}
-                </NavLink>
+                {child.disabled ? (
+                  <DisabledSubItem child={child} className="sidebar-flyout-link" />
+                ) : (
+                  <NavLink
+                    to={child.link}
+                    className={({ isActive }) => `sidebar-flyout-link ${isActive ? "active" : ""}`}
+                    onClick={handleFlyoutNavigate}
+                  >
+                    {child.label}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>

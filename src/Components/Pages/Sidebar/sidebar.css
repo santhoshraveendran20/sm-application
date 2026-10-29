@@ -257,6 +257,33 @@
   font-weight: 700;
 }
 
+.sidebar-sublink.is-disabled,
+.sidebar-flyout-link.is-disabled {
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--sidebar-muted);
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.sidebar-sublink.is-disabled:hover,
+.sidebar-flyout-link.is-disabled:hover {
+  background: transparent;
+  color: var(--sidebar-muted);
+}
+
+.sidebar-phase {
+  flex: none;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
 .sidebar-footer {
   display: flex;
   flex-direction: column;

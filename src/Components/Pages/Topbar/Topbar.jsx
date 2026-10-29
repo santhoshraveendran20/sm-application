@@ -6,7 +6,7 @@ import { Bell, ChevronDown, LogOut, Menu, Moon, PanelLeftClose, PanelLeftOpen, S
 import { logout } from "../../redux/features/auth.jsx";
 import { useTheme } from "../../../Themecontext.jsx";
 import { dismissProps } from "../../common/dismissProps.js";
-import { formatRefreshed, getInitials } from "../../common/formatters.js";
+import { getInitials } from "../../common/formatters.js";
 import ServerStatus from "./ServerStatus.jsx";
 import NotificationPanel from "../Notifications/NotificationPanel.jsx";
 import { initialNotifications } from "../Notifications/notificationData.js";
@@ -22,7 +22,6 @@ function Topbar({ collapsed, onToggleCollapse, onOpenMenu }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [notifications, setNotifications] = useState(initialNotifications);
-  const [refreshedAt] = useState(() => formatRefreshed(new Date()));
   const profileBtnRef = useRef(null);
   const menuRef = useRef(null);
   const bellRef = useRef(null);
@@ -97,10 +96,6 @@ function Topbar({ collapsed, onToggleCollapse, onOpenMenu }) {
       </div>
 
       <div className="topbar-right">
-        <span className="refresh-pill">
-          <span className="refresh-dot" aria-hidden="true" />
-          Data refreshed {refreshedAt}
-        </span>
         <ServerStatus />
         <button
           type="button"

@@ -45,7 +45,7 @@ const moduleRoutes = flatNavItems
   .map((item) => ({
     path: item.link,
     handle: { crumbs: item.parent ? [item.parent, item.label] : [item.label] },
-    element: modulePages[item.link] || <ComingSoon />,
+    element: item.disabled ? <Navigate to="/config/thresholds" replace /> : modulePages[item.link] || <ComingSoon />,
   }));
 
 const AdminRouter = [
