@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight, Check, Copy, Database, RefreshCw, SearchX, ThumbsDown, ThumbsUp, TriangleAlert } from "lucide-react";
 import { formatTime } from "../../common/formatters.js";
 import { sourceLabel } from "./askData.js";
+import mark from "../../../images/Logo/srmtech-mark.png";
 
 export function Avatar({ large = false }) {
   return (
     <span className={`as-avatar ${large ? "is-large" : ""}`} aria-hidden="true">
-      <Database size={large ? 26 : 16} />
+      <img src={mark} alt="" />
     </span>
   );
 }
@@ -101,7 +102,7 @@ function ChatMessage({ message, isLast, readOnly, onRetry, onRegenerate, onFeedb
         )}
 
         {(message.text || message.status === "stopped") && message.status !== "error" && (
-          <div className={`as-answer ${message.noData ? "is-nodata" : ""}`}>
+          <div className={`as-answer ${message.noData ? "is-nodata" : ""} ${message.table || message.chart ? "has-data" : ""}`}>
             {message.noData && !message.unknown && <SearchX size={16} aria-hidden="true" className="as-answer-icon" />}
             <p className="as-text">
               {message.text}

@@ -3,7 +3,7 @@ import "./configurations.css";
 
 const TABS = [
   { to: "/config/thresholds", label: "Thresholds" },
-  { to: "/config/rules", label: "Risk rules" },
+  { to: "/config/rules", label: "Risk rules", phase: 2 },
   { to: "/config/notifications", label: "Notifications" },
   { to: "/config/integrations", label: "Integrations" },
 ];
@@ -21,8 +21,9 @@ function ConfigShell({ actions, children }) {
 
       <nav className="cf-tabs" aria-label="Configuration sections">
         {TABS.map((tab) => (
-          <NavLink key={tab.to} to={tab.to} className={({ isActive }) => `cf-tab ${isActive ? "active" : ""}`}>
+          <NavLink key={tab.to} to={tab.to} className={({ isActive }) => `cf-tab ${isActive ? "active" : ""} ${tab.phase ? "is-upcoming" : ""}`}>
             {tab.label}
+            {tab.phase && <span className="cf-tab-phase">Phase {tab.phase}</span>}
           </NavLink>
         ))}
       </nav>

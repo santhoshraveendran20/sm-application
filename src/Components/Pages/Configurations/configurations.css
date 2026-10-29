@@ -55,6 +55,22 @@
   color: var(--ink);
 }
 
+.cf-tab.is-upcoming:not(.active) {
+  opacity: 0.6;
+}
+
+.cf-tab-phase {
+  margin-left: 14px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
 .cf-tab.active::after {
   content: "";
   position: absolute;
