@@ -8,6 +8,7 @@ import UserManagement from "./Components/Pages/UserManagement/UserManagement.jsx
 import RoleManagement from "./Components/Pages/RoleManagement/RoleManagement.jsx";
 import RolePermissions from "./Components/Pages/RolePermissions/RolePermissions.jsx";
 import AuditLog from "./Components/Pages/AuditLog/AuditLog.jsx";
+import Dashboard from "./Components/Pages/Dashboard/Dashboard.jsx";
 import Leakage from "./Components/Pages/Leakage/Leakage.jsx";
 import HcpFatigue from "./Components/Pages/HcpFatigue/HcpFatigue.jsx";
 import ManualUpload from "./Components/Pages/DataUpload/ManualUpload.jsx";
@@ -24,6 +25,7 @@ import ErrorPage from "./Components/Pages/ErrorPage/ErrorPage.jsx";
 import { flatNavItems } from "./Components/Pages/Sidebar/SidebarData.js";
 
 const modulePages = {
+  "/dashboard": <Dashboard />,
   "/leakage": <Leakage />,
   "/fatigue": <HcpFatigue />,
   "/upload/manual": <ManualUpload />,

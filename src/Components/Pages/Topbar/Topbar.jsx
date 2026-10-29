@@ -7,6 +7,7 @@ import { logout } from "../../redux/features/auth.jsx";
 import { useTheme } from "../../../Themecontext.jsx";
 import { dismissProps } from "../../common/dismissProps.js";
 import { formatRefreshed, getInitials } from "../../common/formatters.js";
+import ServerStatus from "./ServerStatus.jsx";
 import NotificationPanel from "../Notifications/NotificationPanel.jsx";
 import { initialNotifications } from "../Notifications/notificationData.js";
 import "./topbar.css";
@@ -100,6 +101,7 @@ function Topbar({ collapsed, onToggleCollapse, onOpenMenu }) {
           <span className="refresh-dot" aria-hidden="true" />
           Data refreshed {refreshedAt}
         </span>
+        <ServerStatus />
         <button
           type="button"
           className="icon-btn"

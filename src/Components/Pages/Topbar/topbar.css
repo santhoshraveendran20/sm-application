@@ -293,3 +293,142 @@
     max-width: 320px;
   }
 }
+
+.server-status {
+  position: relative;
+  flex: none;
+}
+
+.server-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s var(--ease);
+}
+
+.server-pill:hover {
+  opacity: 0.85;
+}
+
+.server-pill i,
+.server-panel-title i {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.server-pill.tone-checking {
+  background: var(--neutral-bg);
+  color: var(--ink-2);
+}
+
+.server-pill.tone-available {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.server-pill.tone-reconnecting {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.server-pill.tone-unavailable {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.server-pill.tone-checking i,
+.server-pill.tone-reconnecting i {
+  animation: server-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes server-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.server-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  display: grid;
+  gap: 10px;
+  width: 288px;
+  max-width: calc(100vw - 32px);
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.server-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.server-panel-title.tone-available i {
+  color: var(--success);
+}
+
+.server-panel-title.tone-reconnecting i {
+  color: var(--warning);
+}
+
+.server-panel-title.tone-unavailable i {
+  color: var(--danger);
+}
+
+.server-panel-title.tone-checking i {
+  color: var(--muted);
+}
+
+.server-panel-text {
+  color: var(--ink-2);
+  font-size: 12px;
+}
+
+.server-panel-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.server-panel-meta dt {
+  color: var(--muted);
+}
+
+.server-panel-meta dd {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.server-panel .btn {
+  justify-self: start;
+}
+
+@media (max-width: 640px) {
+  .server-pill span {
+    display: none;
+  }
+
+  .server-pill {
+    padding: 11px;
+  }
+}

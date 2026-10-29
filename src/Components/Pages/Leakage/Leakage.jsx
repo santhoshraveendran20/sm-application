@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { ArrowDown, ArrowUp, ArrowUpDown, Calendar, Download, Info, RefreshCw, Search, SearchX, Settings2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Download, Info, RefreshCw, Search, SearchX, Settings2, X } from "lucide-react";
+import DatePickerField from "../../common/DatePickerField/DatePickerField.jsx";
 import MultiSelectField from "../../common/MultiSelectField/MultiSelectField.jsx";
 import SwitchField from "../../common/SwitchField/SwitchField.jsx";
 import PaginationComponent from "../../Pagination/PaginationComponent.jsx";
@@ -68,28 +69,6 @@ function SortHeader({ column, sort, onSort }) {
         <Icon size={13} aria-hidden="true" />
       </button>
     </th>
-  );
-}
-
-function DateField({ id, label, value, min, max, onChange }) {
-  return (
-    <div className="field lk-range">
-      <label htmlFor={id} className="field-label">
-        {label}
-      </label>
-      <div className="input-wrap lk-date-input">
-        <input
-          id={id}
-          type="date"
-          className={`input ${value ? "" : "is-empty"}`}
-          value={value}
-          min={min}
-          max={max}
-          onChange={(event) => onChange(event.target.value)}
-        />
-        <Calendar className="lk-date-icon" size={16} aria-hidden="true" />
-      </div>
-    </div>
   );
 }
 
@@ -233,7 +212,8 @@ function Leakage() {
               searchPlaceholder="Search products"
             />
           </div>
-          <DateField
+          <DatePickerField
+            className="lk-range"
             id="lk-from"
             label="From"
             value={filters.from}
@@ -241,7 +221,8 @@ function Leakage() {
             max={filters.to || DATE_RANGE.max}
             onChange={(value) => updateFilter("from", value)}
           />
-          <DateField
+          <DatePickerField
+            className="lk-range"
             id="lk-to"
             label="To"
             value={filters.to}

@@ -162,7 +162,6 @@ function Sidebar({ compact, mobileOpen, onNavigate }) {
           <span>© {year}</span>
         ) : (
           <>
-            <span>Version 5.0</span>
             <span>© {year} SRM Technologies. All rights reserved.</span>
           </>
         )}

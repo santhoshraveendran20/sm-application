@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { ArrowDown, ArrowUp, Calendar, Download, RefreshCw, Search, SearchX, X } from "lucide-react";
+import { ArrowDown, ArrowUp, Download, RefreshCw, Search, SearchX, X } from "lucide-react";
+import DatePickerField from "../../common/DatePickerField/DatePickerField.jsx";
 import MultiSelectField from "../../common/MultiSelectField/MultiSelectField.jsx";
 import PaginationComponent from "../../Pagination/PaginationComponent.jsx";
 import AppliedFilters from "../UserManagement/AppliedFilters.jsx";
@@ -44,28 +45,6 @@ const downloadCsv = (entries) => {
 
 function ResultBadge({ result }) {
   return <span className={`al-result tone-${result === "Failed" ? "danger" : "success"}`}>{result}</span>;
-}
-
-function DateField({ id, label, value, min, max, onChange }) {
-  return (
-    <div className="field al-range">
-      <label htmlFor={id} className="field-label">
-        {label}
-      </label>
-      <div className="input-wrap al-date-input">
-        <Calendar className="input-icon" size={16} aria-hidden="true" />
-        <input
-          id={id}
-          type="date"
-          className={`input has-icon ${value ? "" : "is-empty"}`}
-          value={value}
-          min={min}
-          max={max}
-          onChange={(event) => onChange(event.target.value)}
-        />
-      </div>
-    </div>
-  );
 }
 
 function AuditLog() {
@@ -214,8 +193,8 @@ function AuditLog() {
               searchable={false}
             />
           </div>
-          <DateField id="al-from" label="From" value={filters.from} max={filters.to || today} onChange={(value) => updateFilter("from", value)} />
-          <DateField id="al-to" label="To" value={filters.to} min={filters.from || undefined} max={today} onChange={(value) => updateFilter("to", value)} />
+          <DatePickerField className="al-range" id="al-from" label="From" value={filters.from} max={filters.to || today} onChange={(value) => updateFilter("from", value)} />
+          <DatePickerField className="al-range" id="al-to" label="To" value={filters.to} min={filters.from || undefined} max={today} onChange={(value) => updateFilter("to", value)} />
         </div>
 
         {chipGroups.some((group) => group.values.length > 0) && (

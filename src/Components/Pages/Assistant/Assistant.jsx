@@ -7,6 +7,7 @@ import { useConfigStore } from "../Configurations/configData.js";
 import { useUploadStore } from "../DataUpload/uploadData.js";
 import { SOURCES, SUGGESTIONS, askCdi, sourceLabel } from "./askData.js";
 import { addChat, addMessage, archiveChats, makeTitle, patchMessage, removeMessage, renameChat, restoreChats, useChatStore } from "./chatData.js";
+import SourceStatus from "./SourceStatus.jsx";
 import ChatList from "./ChatList.jsx";
 import ChatMessage, { Avatar } from "./ChatMessage.jsx";
 import "./assistant.css";
@@ -288,10 +289,7 @@ function Assistant() {
             {chat ? chat.title : "New chat"}
             {archivedChat && <span> (archived, read only)</span>}
           </h1>
-          <span className="as-status" role="status">
-            <i aria-hidden="true" />
-            All sources online
-          </span>
+          <SourceStatus />
         </header>
 
         <div className="as-scroll" ref={scrollRef}>
