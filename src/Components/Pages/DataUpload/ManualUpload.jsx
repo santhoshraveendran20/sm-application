@@ -126,6 +126,13 @@ function ManualUpload() {
     toast.success(`${result.invalid} invalid rows downloaded, with the problem for each.`);
   };
 
+  const downloadRows = (kind, count) => {
+    const columns = REQUIRED_COLUMNS[result.type];
+    const rows = Array.from({ length: count }, (_, index) => columns.map((column) => (column === "prescriber_npi" ? String(1000000001 + index) : `${column}_${index + 1}`)));
+    downloadCsv(`${file.name.replace(/\.csv$/i, "")}_${kind}_rows.csv`, columns, rows);
+    toast.success(`${formatCount(count)} ${kind} rows downloaded.`);
+  };
+
   const downloadTemplate = (type) => downloadCsv(`${type.toLowerCase()}_template.csv`, REQUIRED_COLUMNS[type]);
 
   const selecting = phase === "select" || phase === "validating";
@@ -178,14 +185,6 @@ function ManualUpload() {
                     Browse files
                   </button>
                   <input ref={inputRef} type="file" accept=".csv,text/csv" className="sr-only" aria-label="Choose a CSV file" onChange={(event) => pickFile(event.target.files[0])} />
-                  <div className="du-drop-samples">
-                    <button type="button" className="du-link" onClick={() => setFile({ name: "claims_manual_20261029.csv", size: 412000 })}>
-                      Use sample file
-                    </button>
-                    <button type="button" className="du-link" onClick={() => setFile({ name: "claims_with_errors.csv", size: 98000, broken: true })}>
-                      Use sample with errors
-                    </button>
-                  </div>
                 </div>
               )}
 
@@ -247,6 +246,11 @@ function ManualUpload() {
                 <div className="du-stat tone-success">
                   <p className="du-stat-value">{formatCount(result.valid)}</p>
                   <p className="du-stat-label">Valid</p>
+                  {result.valid > 0 && (
+                    <button type="button" className="icon-btn ghost du-stat-action" aria-label="Download valid rows as CSV" title="Download valid rows (CSV)" onClick={() => downloadRows("valid", result.valid)}>
+                      <Download size={16} />
+                    </button>
+                  )}
                 </div>
                 <div className="du-stat tone-danger">
                   <p className="du-stat-value">{formatCount(result.invalid)}</p>
@@ -260,6 +264,11 @@ function ManualUpload() {
                 <div className="du-stat tone-warning">
                   <p className="du-stat-value">{formatCount(result.duplicates)}</p>
                   <p className="du-stat-label">Duplicates (skipped)</p>
+                  {result.duplicates > 0 && (
+                    <button type="button" className="icon-btn ghost du-stat-action" aria-label="Download duplicate rows as CSV" title="Download duplicate rows (CSV)" onClick={() => downloadRows("duplicate", result.duplicates)}>
+                      <Download size={16} />
+                    </button>
+                  )}
                 </div>
               </div>
               <p className="du-callout">

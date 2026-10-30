@@ -120,12 +120,12 @@
   color: var(--ink-2);
 }
 
-.ms-clear:hover:not(:disabled) {
+.ms-clear:hover:not([aria-disabled="true"]) {
   color: var(--ink);
   text-decoration: underline;
 }
 
-.ms-clear:disabled {
+.ms-clear[aria-disabled="true"] {
   color: var(--muted);
   opacity: 0.6;
   cursor: not-allowed;

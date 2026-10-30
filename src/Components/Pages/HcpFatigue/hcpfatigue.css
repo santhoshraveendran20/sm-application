@@ -449,35 +449,3 @@
   }
 }
 
-@media (min-width: 1024px) and (min-height: 640px) {
-  .hcp-fatigue {
-    height: calc(100vh - var(--topbar-h) - 60px);
-    height: calc(100dvh - var(--topbar-h) - 60px);
-  }
-
-  .hf-card {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .hf-table-wrap {
-    flex: 1;
-    min-height: 0;
-    overflow: auto;
-  }
-
-  .hf-table th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
-}
-
-@media (min-width: 1280px) and (min-height: 640px) {
-  .hcp-fatigue {
-    height: calc(100vh - var(--topbar-h) - 68px);
-    height: calc(100dvh - var(--topbar-h) - 68px);
-  }
-}

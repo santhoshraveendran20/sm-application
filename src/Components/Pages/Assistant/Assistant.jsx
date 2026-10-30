@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Archive, ArrowUp, ChevronDown,PanelLeftClose, PanelLeftOpen, Sparkles, Square } from "lucide-react";
+import { Archive, ArrowUp, Check, ChevronDown, PanelLeftClose, PanelLeftOpen, Sparkles, Square } from "lucide-react";
 import ConfirmModal from "../../common/ConfirmModal/ConfirmModal.jsx";
+import { dismissProps } from "../../common/dismissProps.js";
 import { useConfigStore } from "../Configurations/configData.js";
 import { useUploadStore } from "../DataUpload/uploadData.js";
 import { SOURCES, SUGGESTIONS, askCdi, sourceLabel } from "./askData.js";
@@ -23,6 +24,9 @@ const greeting = () => {
 function Composer({ onSend, onStop, streaming, source, setSource }) {
   const [text, setText] = useState("");
   const areaRef = useRef(null);
+  const pickRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const current = SOURCES.find((item) => item.id === source) || SOURCES[0];
 
   useEffect(() => {
     const area = areaRef.current;
@@ -68,18 +72,51 @@ function Composer({ onSend, onStop, streaming, source, setSource }) {
         }}
       />
       <div className="as-composer-bar">
-        <label className="as-source-pick">
-          <span className="sr-only">Data source</span>
-          <Sparkles size={16} aria-hidden="true" className="as-source-icon" />
-          <select value={source} onChange={(event) => setSource(event.target.value)} aria-label="Answer using">
-            {SOURCES.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.short}
-              </option>
-            ))}
-          </select>
-          <ChevronDown size={16} aria-hidden="true" className="as-source-chevron" />
-        </label>
+        <div
+          className={`as-source-pick ${menuOpen ? "is-open" : ""}`}
+          {...(menuOpen
+            ? dismissProps((viaKey) => {
+                setMenuOpen(false);
+                if (viaKey) pickRef.current?.focus();
+              })
+            : {})}
+        >
+          <button
+            type="button"
+            ref={pickRef}
+            className="as-source-btn"
+            aria-label={`Answer using: ${current.short}`}
+            aria-haspopup="listbox"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <Sparkles size={16} aria-hidden="true" className="as-source-icon" />
+            <span>{current.short}</span>
+            <ChevronDown size={16} aria-hidden="true" className="as-source-chevron" />
+          </button>
+          {menuOpen && (
+            <ul className="as-source-menu" role="listbox" aria-label="Answer using">
+              {SOURCES.map((item) => (
+                <li key={item.id} role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={item.id === source}
+                    className={`as-source-opt ${item.id === source ? "is-selected" : ""}`}
+                    onClick={() => {
+                      setSource(item.id);
+                      setMenuOpen(false);
+                      pickRef.current?.focus();
+                    }}
+                  >
+                    <span>{item.short}</span>
+                    {item.id === source && <Check size={15} aria-hidden="true" />}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         {left <= 200 && (
           <span className={`as-left ${left <= 50 ? "is-low" : ""}`} aria-live="polite">
             {left} characters left

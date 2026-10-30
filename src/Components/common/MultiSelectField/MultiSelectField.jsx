@@ -115,7 +115,7 @@ function MultiSelectField({ id, label, options, value, onChange, allLabel, searc
           )}
 
           <div className="ms-footer">
-            <button type="button" className="ms-clear" onClick={() => setDraft([])} disabled={draft.length === 0}>
+            <button type="button" className="ms-clear" onClick={() => setDraft([])} aria-disabled={draft.length === 0}>
               Clear
             </button>
             <button type="button" className="btn btn-primary btn-sm" onClick={apply}>

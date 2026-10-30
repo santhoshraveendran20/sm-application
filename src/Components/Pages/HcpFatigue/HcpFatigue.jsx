@@ -48,7 +48,7 @@ function FatigueBadge({ value }) {
   const level = fatigueLevel(value);
   return (
     <span className={`hf-badge tone-${FATIGUE_TONES[level]}`}>
-      {value}
+      {value}%
       <span className="sr-only">, {level.toLowerCase()} fatigue</span>
     </span>
   );
