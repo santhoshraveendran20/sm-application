@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Archive, ArrowUp, ChevronDown, Mic, PanelLeftClose, PanelLeftOpen, Sparkles, Square } from "lucide-react";
+import { Archive, ArrowUp, ChevronDown,PanelLeftClose, PanelLeftOpen, Sparkles, Square } from "lucide-react";
 import ConfirmModal from "../../common/ConfirmModal/ConfirmModal.jsx";
 import { useConfigStore } from "../Configurations/configData.js";
 import { useUploadStore } from "../DataUpload/uploadData.js";
@@ -20,37 +20,9 @@ const greeting = () => {
   return hour < 17 ? "Good afternoon" : "Good evening";
 };
 
-const SpeechRecognition = typeof window !== "undefined" ? window.SpeechRecognition || window.webkitSpeechRecognition : null;
-
 function Composer({ onSend, onStop, streaming, source, setSource }) {
   const [text, setText] = useState("");
-  const [listening, setListening] = useState(false);
   const areaRef = useRef(null);
-  const recogRef = useRef(null);
-
-  useEffect(() => () => recogRef.current?.abort(), []);
-
-  const dictate = () => {
-    if (listening) {
-      recogRef.current?.stop();
-      return;
-    }
-    const recog = new SpeechRecognition();
-    recog.lang = "en-US";
-    recog.interimResults = false;
-    recog.onresult = (event) => {
-      const heard = Array.from(event.results).map((result) => result[0].transcript).join(" ");
-      setText((prev) => `${prev}${prev && !prev.endsWith(" ") ? " " : ""}${heard}`.slice(0, MAX_LENGTH));
-    };
-    recog.onerror = () => toast.error("Couldn’t hear that. Check microphone access.");
-    recog.onend = () => {
-      setListening(false);
-      recogRef.current = null;
-    };
-    recogRef.current = recog;
-    setListening(true);
-    recog.start();
-  };
 
   useEffect(() => {
     const area = areaRef.current;
@@ -114,11 +86,6 @@ function Composer({ onSend, onStop, streaming, source, setSource }) {
           </span>
         )}
         <span className="as-grow" />
-        {SpeechRecognition && !streaming && (
-          <button type="button" className={`as-mic ${listening ? "is-on" : ""}`} onClick={dictate} aria-pressed={listening} aria-label={listening ? "Stop dictation" : "Dictate question"} title="Dictate">
-            <Mic size={17} />
-          </button>
-        )}
         {streaming ? (
           <button type="button" className="as-send" onClick={onStop} aria-label="Stop answering" title="Stop">
             <Square size={14} fill="currentColor" />

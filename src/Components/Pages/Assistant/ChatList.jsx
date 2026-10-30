@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Archive, ArchiveRestore, Check, MessageSquare, MoreHorizontal, Pencil, Plus, Search, X } from "lucide-react";
+import { Archive, ArchiveRestore, Check, ListChecks, MessageSquare, MoreHorizontal, Pencil, Plus, Search, X } from "lucide-react";
 import SwitchField from "../../common/SwitchField/SwitchField.jsx";
 import { GROUPS, groupOf } from "./chatData.js";
 
@@ -126,6 +126,7 @@ function ChatList({ chats, activeId, onOpen, onNew, onRename, onArchive, onResto
           <h2 className="as-list-title">Chats</h2>
           {active.length > 0 && (
             <button type="button" className="btn btn-ghost btn-sm" onClick={() => (selecting ? stopSelecting() : setSelecting(true))}>
+              {selecting ? <X size={15} aria-hidden="true" /> : <ListChecks size={15} aria-hidden="true" />}
               {selecting ? "Cancel" : "Select"}
             </button>
           )}

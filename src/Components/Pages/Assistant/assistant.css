@@ -1,14 +1,21 @@
+.app-content:has(> .assistant-page) {
+  padding: 0;
+}
+
 .assistant-page {
+  --chat-bg: #eaf5f7;
   position: relative;
   display: flex;
-  height: calc(100vh - 150px);
+  height: calc(100vh - var(--topbar-h));
+  height: calc(100dvh - var(--topbar-h));
   min-height: 560px;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
   animation: fade-up 0.3s var(--ease);
+}
+
+:root[data-theme="dark"] .assistant-page {
+  --chat-bg: #0c1330;
 }
 
 /* ---------- chat list ---------- */
@@ -342,6 +349,7 @@
 .as-scroll {
   flex: 1;
   min-height: 0;
+  background: var(--chat-bg);
   padding: 24px 20px;
   overflow-y: auto;
 }
@@ -775,7 +783,7 @@
 .as-foot {
   padding: 12px 20px 10px;
   border-top: 1px solid var(--line);
-  background: var(--bg);
+  background: var(--chat-bg);
 }
 
 .as-foot-inner {
@@ -969,10 +977,6 @@
 }
 
 @media (max-width: 640px) {
-  .assistant-page {
-    height: calc(100vh - 120px);
-  }
-
   .as-welcome ul {
     grid-template-columns: minmax(0, 1fr);
   }
