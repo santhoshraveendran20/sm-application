@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMsal } from "@azure/msal-react";
 import { InteractionStatus } from "@azure/msal-browser";
 import toast from "react-hot-toast";
-import { AlertCircle, CircleUserRound, Eye, EyeOff, Loader2, LockKeyhole, LogIn } from "lucide-react";
+import { AlertCircle, CircleUserRound, Droplets, Eye, EyeOff, Gauge, Loader2, LockKeyhole, LogIn, ShieldCheck } from "lucide-react";
 import request from "../../../api/api.jsx";
 import { clearSsoPending, hasSsoPending, isSsoConfigured, loginRequest, markSsoPending } from "../../../config/authConfig.jsx";
 import { setCredentials } from "../../redux/features/auth.jsx";
@@ -15,9 +15,9 @@ import logoWhite from "../../../images/Logo/srmtech-logo-white.png";
 import "./login.css";
 
 const features = [
-  { title: "Rx leakage", text: "Rejected claims by product, HCP, pharmacy and state" },
-  { title: "HCP fatigue", text: "Channel saturation and next-best actions" },
-  { title: "Role-based access", text: "Every user sees only what their role allows" },
+  { icon: Droplets, title: "Rx leakage", text: "Rejected claims by product, HCP, pharmacy and state" },
+  { icon: Gauge, title: "HCP fatigue", text: "Channel saturation and next-best actions" },
+  { icon: ShieldCheck, title: "Role-based access", text: "Every user sees only what their role allows" },
 ];
 
 const loginErrorMessage = (error) => {
@@ -125,15 +125,20 @@ function Login() {
             See where brand prescriptions are being lost, which HCPs are over-contacted, and what the field team should do next.
           </p>
           <ul className="login-features">
-            {features.map((feature) => (
-              <li key={feature.title} className="login-feature">
-                <strong>{feature.title}</strong>
-                <span>{feature.text}</span>
+            {features.map(({ icon: Icon, title, text }) => (
+              <li key={title} className="login-feature">
+                <span className="login-feature-icon" aria-hidden="true">
+                  <Icon size={20} />
+                </span>
+                <span className="login-feature-body">
+                  <strong>{title}</strong>
+                  <span>{text}</span>
+                </span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="login-hero-footer">SRMTech · Commercial intelligence at work</p>
+        <p className="login-hero-footer">© {new Date().getFullYear()} SRM Technologies. All rights reserved.</p>
       </section>
 
       <main className="login-main">

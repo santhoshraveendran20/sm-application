@@ -41,7 +41,7 @@ function Sidebar({ compact, mobileOpen, onNavigate }) {
     setFloating(null);
     const activeGroup = SidebarData.find((item) => isInGroup(item, pathname));
     if (activeGroup && !expanded.includes(activeGroup.id)) {
-      setExpanded([...expanded, activeGroup.id]);
+      setExpanded([activeGroup.id]);
     }
   }
 
@@ -71,7 +71,7 @@ function Sidebar({ compact, mobileOpen, onNavigate }) {
       setFloating((prev) => (prev?.type === "flyout" && prev.id === item.id ? null : { type: "flyout", id: item.id, item, top }));
       return;
     }
-    setExpanded((prev) => (prev.includes(item.id) ? prev.filter((id) => id !== item.id) : [...prev, item.id]));
+    setExpanded((prev) => (prev.includes(item.id) ? [] : [item.id]));
   };
 
   const handleFlyoutNavigate = () => {

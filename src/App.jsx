@@ -1,5 +1,6 @@
 import { RouterProvider } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import { ToastBar, Toaster, toast } from "react-hot-toast";
+import { X } from "lucide-react";
 import router from "./router.jsx";
 import "./App.css";
 
@@ -31,7 +32,23 @@ const toastOptions = {
 function App() {
   return (
     <>
-      <Toaster position="top-right" gutter={10} toastOptions={toastOptions} />
+      <Toaster position="top-right" gutter={10} toastOptions={toastOptions}>
+        {(t) => (
+          <ToastBar toast={t}>
+            {({ icon, message }) => (
+              <>
+                {icon}
+                {message}
+                {t.type !== "loading" && (
+                  <button type="button" className="app-toast-close" aria-label="Dismiss notification" onClick={() => toast.dismiss(t.id)}>
+                    <X size={16} aria-hidden="true" />
+                  </button>
+                )}
+              </>
+            )}
+          </ToastBar>
+        )}
+      </Toaster>
       <RouterProvider router={router} />
     </>
   );
